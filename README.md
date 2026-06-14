@@ -18,7 +18,7 @@ groovy-fizzbuzz
 ===============
 
 Companion code for the blog post
-**"FizzBuzz with Groovy and Emojis"**.
+**["FizzBuzz with Groovy and Emojis"](https://groovy.apache.org/blog/fizzbuzz-with-groovy-and-emojis)**.
 
 The point isn't to find the *one best* FizzBuzz — it's to tour a bunch of
 fun, genuinely different ways to write it, then render them all with the same
