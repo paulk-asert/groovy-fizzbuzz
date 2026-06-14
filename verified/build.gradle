@@ -1,0 +1,41 @@
+/*
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// Consumer of the groovy-verify SMT engine. Compiling this module IS the demo:
+// the @Ensures/@Invariant/@Decreases contracts on FizzBuzz are discharged by Z3
+// while this module compiles. Compilation succeeds only because every slot of
+// the built array is provably faithful to spec(i + 1).
+//
+//   ../gradlew :verified:compileGroovy   - the compile-time proof
+//   ../gradlew :verified:run.FizzBuzz    - run the verified build
+//   ../gradlew :verified:run.BadFizzBuzz - see the off-by-one refuted, with a counterexample
+plugins {
+    id 'groovy-setup'
+}
+
+dependencies {
+    // The verification engine, consumed from its own repo. Resolved from source
+    // by the `includeBuild('../groovy-verify')` composite build in settings.gradle
+    // (and from Maven Central once published, with no change here).
+    implementation 'io.github.paulk-asert:groovy-verify:0.1.0-SNAPSHOT'
+}
+
+// The type-checking extension doesn't just reference Z3 — it RUNS Z3 while this
+// module compiles, so the solver's full runtime classpath must be visible to
+// the Groovy compiler here.
+tasks.named('compileGroovy') {
+    classpath += configurations.runtimeClasspath
+}
