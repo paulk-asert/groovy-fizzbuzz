@@ -46,7 +46,8 @@ class Join {
     @Ensures({ '🥤' + '🐝' == '🥤🐝' })          // not just abstract strings — the actual emoji, proven
     static void emojiGlue() { }
 
-    static String token(int n) {
+    // The per-number renderer — the same FizzBuzz spec proven in FizzBuzz.groovy.
+    static String spec(int n) {
         n % 15 == 0 ? '🥤🐝' : (n % 3 == 0 ? '🥤' : (n % 5 == 0 ? '🐝' : n.toString()))
     }
 
@@ -54,7 +55,7 @@ class Join {
         // CombinerChecker certifies this seedless parallel site (glue is @Reducer).
         // Because glue is a proven monoid, the parallel join equals the sequential
         // one for any split — partition-and-recombine is safe.
-        (1..20).collect { token(it) + ' ' }.sumParallel(Join::glue)
+        (1..20).collect { spec(it) + ' ' }.sumParallel(Join::glue)
     }
 }
 // Compiling this class IS the demo: both checkers agree. JoinDemo.groovy runs it.

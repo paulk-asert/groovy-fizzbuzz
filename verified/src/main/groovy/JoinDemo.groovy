@@ -23,7 +23,7 @@ import groovy.concurrent.ParallelScope
 // parallel gives exactly the same string as joining them sequentially.
 //   🥤 = Fizz (÷3),  🐝 = Buzz (÷5),  🥤🐝 = FizzBuzz (÷15)
 
-def tokens = (1..20).collect { Join.token(it) + ' ' }
+def tokens = (1..20).collect { Join.spec(it) + ' ' }
 
 def sequential = tokens.inject('') { a, b -> Join.glue(a, b) }
 def parallel = ParallelScope.withPool(Pool.virtual()) { tokens.sumParallel(Join::glue) }

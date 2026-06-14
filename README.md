@@ -41,7 +41,7 @@ Modules
 |----------------|-----------------------------------------------------------------------|
 | `classic`      | Nine everyday ways: closure-case `switch`, nested ternary, string-concat + Elvis, the periodic-cycle (zip) trick (finite and lazily-infinite), a 2&times;2 truth table (as a lookup and as a stringified-key `switch`), a CaseFunction-style predicate list, and GINQ |
 | `concurrency`  | FizzBuzz in parallel — Groovy 6's integrated parallel collections (GPars folded into core, GEP-18) and the ordinary Java-Streams form |
-| `verified`     | Element-wise array correctness proven at compile time by the [groovy-verify](https://github.com/paulk-asert/groovy-verify) SMT engine — plus a two-checker (`CombinerChecker` + `VerifyChecker`) string-concat join combiner, proven a monoid over the emoji |
+| `verified`     | Element-wise array correctness proven at compile time by the [groovy-verify](https://github.com/paulk-asert/groovy-verify) SMT engine — plus a two-checker (`CombinerChecker` + `VerifyChecker`) string-concat join combiner, proven a monoid over the emoji (`Join.groovy` states the laws explicitly; `JoinAuto.groovy` lets the engine derive associativity and identity from `@Reducer` alone) |
 | `diabolical`   | The expressive end — metaprogramming variants (an `Integer.fizzBuzz` property, an overloaded `Integer * String`) plus a plain-arithmetic one; powerful techniques, to reach for deliberately |
 | `speculative/` | Not a module — a single illustrative file sketching the Groovy 7 GEP-19 primitive-pattern form (does **not** compile on Groovy 6) |
 
